@@ -1,0 +1,150 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #1e1e2d;
+    color: white;
+    padding: 10px 20px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    font-size: 24px;
+}
+
+.logo h1 {
+    margin: 0;
+}
+
+.product-list-btn button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 30px;
+}
+
+.product-list-btn button:hover {
+    background-color: #ff5722;
+
+}
+
+/* Main content */
+main {
+    padding: 0px;
+    max-width: 1200px;
+}
+
+h2 {
+    font-size: 14px;
+    color: red;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.product_form_create {
+    width: 100%;
+    margin-left: 30px;
+    background-color:white;
+}
+
+.datos {
+    font-size: 12px;
+    display: flex;
+}
+.caja1{
+    padding: 10px;
+}
+
+label {
+    margin: 10px 0 5px;
+}
+
+input, textarea {
+    width: 220px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 10px;
+}
+
+textarea {
+    height: 20px;
+    width: 320px;
+}
+
+.selectors {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-right {
+    width: 35%;
+    background-color: #ccc;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.image-placeholder {
+    background-color: white;
+    border: 2px dashed #ccc;
+    height: 80px;
+    width: 80px;
+}
+
+.add-image-btn {
+    display: block;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    margin: 10px 0 0;
+    cursor: pointer;
+}
+
+.add-image-btn:hover {
+    background-color: #e60000;
+}
+
+.submit-btn {
+    background-color: red;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.submit-btn:hover {
+    background-color: #e60000;
+}
