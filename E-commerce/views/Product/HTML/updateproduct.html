@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Producto</title>
-    <link rel="stylesheet" href="../CSS/Addproduct.css">
+    <title>Update Product</title>
+    <link rel="stylesheet" href="../CSS/updateproduct.css">
 </head>
 <body>
     <div id="navbar-container"></div>
@@ -14,7 +14,6 @@
             .then(data => {
                 document.getElementById('navbar-container').innerHTML = data;
             });
-            
         document.getElementById('menu-button').addEventListener('click', function() {
             const submenu = document.getElementById('submenu');
             if (submenu.style.display === 'none' || submenu.style.display === '') {
@@ -25,8 +24,11 @@
         });
     </script>
     <br>
+    <!--<div class="product-list-btn">
+        <button onclick="location.href='products.html'">Lista de Productos</button>
+    </div>!-->
     <main>
-        <h2>NUEVO PRODUCTO</h2>
+        <h2>ACTUALIZACION DEL PRODUCTO</h2>
 
         <form class="product_form_create" id="addProductForm">
             <div class="datos">
@@ -81,23 +83,23 @@
                         <div class="image-box">
                             <div class="image-preview" id="imagePreview1">Agregar +</div>
                             <input type="file" id="imageInput1" accept="image/*" class="hidden-input">
-                            <button type="button" class="uploadButton" data-target="imageInput1">Subir Imagen</button>
+                            <button type="button" class="uploadButton" data-target="imageInput1">Actualizar Imagen</button>
                         </div>
                         <div class="image-box">
                             <div class="image-preview" id="imagePreview2">Agregar +</div>
                             <input type="file" id="imageInput2" accept="image/*" class="hidden-input">
-                            <button type="button" class="uploadButton" data-target="imageInput2">Subir Imagen</button>
+                            <button type="button" class="uploadButton" data-target="imageInput2">Actualizar Imagen</button>
                         </div>
                         <div class="image-box">
                             <div class="image-preview" id="imagePreview3">Agregar +</div>
                             <input type="file" id="imageInput3" accept="image/*" class="hidden-input">
-                            <button type="button" class="uploadButton" data-target="imageInput3">Subir Imagen</button>
+                            <button type="button" class="uploadButton" data-target="imageInput3">Actualizar Imagen</button>
                         </div>
                     </div>    
                 </div>
                             
             </div>
-            <button type="submit" class="submit-btn">Guardar Producto</button>
+            <button type="submit" class="submit-btn">Guardar</button>
         </form>
     </main>    
 

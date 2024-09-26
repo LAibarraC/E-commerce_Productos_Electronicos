@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #111827;
+    padding: 10px 20px;
+    color: white;
+}
+
+.navbar-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: #1f2937;
+    border-radius: 5px;
+    list-style: none;
+    padding: 10px;
+    width: 100px;
+}
+
+.submenu li {
+    margin: 5px 0;
+}
+
+.submenu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+  
+}
+
+.submenu li a:hover {
+    color: #3b82f6;
+}
+
+.navbar-logo h1 {
+    margin-left: 70px;
+    font-size: 20px;
+
+}
+
+.navbar-search {
+    flex-grow: 1;
+    margin: 0 80px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navbar-search input {
+    width: 700px; 
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    height: 30px;
+    padding-right: 45px;
+}
+
+
+.search-button {
+    position: absolute;
+    /*buscar*/
+    right: 175px;
+    top: 50%; 
+    transform: translateY(-50%);
+    background-color: #111827;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    width: 35px;
+    height: 25px;
+}
+
+.search-button img {
+    width: 15px;
+    height: 15px;
+}
+
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+
+.user-icon, .cart-icon {
+    font-size: 13px;
+    width: 20px;
+    height: 20px;
+}
