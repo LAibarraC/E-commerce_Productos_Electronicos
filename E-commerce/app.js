@@ -19,11 +19,17 @@ app.use(express.static(path.join(__dirname, 'views/Product')));
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'views/navbar')));
 app.use(express.static(path.join(__dirname, 'views/icon')));
+app.use('/uploads', express.static('uploads'));
 
 
 // Ruta para acceder a la página de agregar producto
 app.get('/addproduct', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/Product/HTML/Addproduct.html')); 
+});
+
+//lista de productos
+app.get('/listproduct', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/Product/HTML/Listproduct.html')); 
 });
 
 // Rutas de la API
