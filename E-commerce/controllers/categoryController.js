@@ -8,7 +8,21 @@ class CategoryController {
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
+    } 
+    async getAllCategories(req, res) {
+        try {
+            const categories = await categoryService.getAllCategories();
+            // Enviar tanto el ID como el nombre de las categorías
+            const categoryData = categories.map(category => ({
+                id: category.id,
+                name: category.name
+            }));
+            res.json(categoryData); // Enviar el array con objetos {id, name}
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+        }
     }
+    
 
     async createCategory(req, res) {
         try {

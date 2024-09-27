@@ -29,4 +29,4 @@ router.get('/categories/:id', getCategory);
 router.get('/categories/search', searchCategories);
 
 module.exports = router;
-
+ 

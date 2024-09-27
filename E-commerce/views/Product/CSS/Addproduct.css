@@ -151,7 +151,8 @@ select {
     background-color: white;
     border-radius: 10px;
     padding: 10px;
-    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 50px;
 }
 .image-box img {
     width: 100%;

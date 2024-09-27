@@ -96,7 +96,7 @@ body {
 .search-button {
     position: absolute;
     /*buscar*/
-    right: 175px;
+    right: 32%;
     top: 50%; 
     transform: translateY(-50%);
     background-color: #111827;

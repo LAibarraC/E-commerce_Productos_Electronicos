@@ -10,7 +10,7 @@ class ProductRepository {
     static async findAllProducts() {
         return await Product.findAll();
     }
-
+ 
     static async findById(id) {
         return await Product.findByPk(id);
     }

@@ -7,35 +7,43 @@ Product.init({
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true 
     },
     code: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: true
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     price: {
         type: DataTypes.FLOAT,
-        allowNull: false
+        allowNull: true
     },
     stock: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     description: {
         type: DataTypes.STRING,
         allowNull: true
     },
-    thumbnail: {
+    thumbnail: { 
         type: DataTypes.STRING,
         allowNull: true
     },
-    images: {
-        type: DataTypes.JSON,
+    image1: {  // Campo para la primera imagen
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    image2: {  // Campo para la segunda imagen
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    image3: {  // Campo para la tercera imagen
+        type: DataTypes.STRING,
         allowNull: true
     },
     discount: {
@@ -76,15 +84,24 @@ Product.init({
     },
     status: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: true
+    },
+    categoryId: { // Campo para la relación con categoría
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'categories',
+            key: 'id'
+        }
     }
 }, {
     sequelize,
     modelName: 'Product',
     tableName: 'products',
-    timestamps: false
+    timestamps: true // Para tener createdAt y updatedAt automáticos
 });
 
 module.exports = Product;
+
 

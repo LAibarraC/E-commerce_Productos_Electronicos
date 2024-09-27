@@ -15,7 +15,7 @@ class ProductService {
 
     async updateProduct(id, productData) {
         return await ProductRepository.updateProduct({ id, ...productData });
-    }
+    } 
 
     async deleteProduct(id) {
         return await ProductRepository.deleteProduct(id);
