@@ -1,16 +1,21 @@
-const multer = require('multer');
+const path = require('path'); 
+const multer = require('multer'); // Importar multer
 
-// Configuración del almacenamiento
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/'); // Asegúrate de que esta carpeta exista
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/'); // Carpeta donde se guardarán las imágenes
     },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname); // Nombra el archivo con un timestamp
     }
 });
 
-// Crea el middleware de multer
-/*const upload = multer({ storage: storage });*/
+// Configurar `multer` para recibir hasta 3 imágenes con nombres específicos (image1, image2, image3)
+const upload = multer({ storage: storage }).fields([
+    { name: 'image1', maxCount: 1 },
+    { name: 'image2', maxCount: 1 },
+    { name: 'image3', maxCount: 1 }
+]);
+
 
 module.exports = upload; // Asegúrate de exportarlo correctamente

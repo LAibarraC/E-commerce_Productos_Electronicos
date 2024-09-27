@@ -25,35 +25,30 @@
             }
         });
     </script>
+    <script>
+        // Función para obtener los nombres de las categorías y llenarlos en el <select>
+            async function fetchCategoryNames() {
+                try {
+                    const response = await fetch('http://localhost:3000/api/categories');
+                    const categories = await response.json();
 
-<script>
-    // Función para obtener los nombres de las categorías y llenarlos en el <select>
-        async function fetchCategoryNames() {
-            try {
-                const response = await fetch('http://localhost:3000/api/categories');
-                const categories = await response.json();
+                    const categorySelect = document.getElementById('categoria');
+                    categorySelect.innerHTML = ''; // Limpiar las opciones antes de agregar nuevas
 
-                const categorySelect = document.getElementById('categoria');
-                categorySelect.innerHTML = ''; // Limpiar las opciones antes de agregar nuevas
-
-                // Agregar una opción por cada categoría (usar id para el valor)
-                categories.forEach(category => {
-                    const option = document.createElement('option');
-                    option.value = category.id;  // Asignar el ID como valor
-                    option.textContent = category.name; // Mostrar el nombre de la categoría
-                    categorySelect.appendChild(option);
-                });
-            } catch (error) {
-                console.error('Error al obtener categorías:', error);
+                    // Agregar una opción por cada categoría (usar id para el valor)
+                    categories.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.id;  // Asignar el ID como valor
+                        option.textContent = category.name; // Mostrar el nombre de la categoría
+                        categorySelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error('Error al obtener categorías:', error);
+                }
             }
-        }
-        
-        window.onload = fetchCategoryNames; // Llama a la función al cargar la página
-
-</script>
-
-
-
+            
+            window.onload = fetchCategoryNames; // Llama a la función al cargar la página
+    </script>
     <br>
     <main>
         <h2>NUEVO PRODUCTO</h2>
@@ -98,6 +93,9 @@
                     <input type="number" id="garantia" name="warranty" min="0" required><br>
                     <label for="description">Descripción:</label><br>
                     <textarea id="description" name="description" required></textarea><br>
+                    <label for="tags">Etiquetas:</label><br>
+                    <input type="text" id="tags" name="tags" placeholder="separar etiquetas por comas"><br><br>
+
                     <div class="selectors">
                         <label for="categoria">Categoría:</label>
                         <select id="categoria" name="categoryId" required>
@@ -114,17 +112,17 @@
                     <div class="image-upload-container">
                         <div class="image-box">
                             <div class="image-preview" id="imagePreview1">Agregar +</div>
-                            <input type="file" id="imageInput1" name="images" accept="image/*" class="hidden-input">
+                            <input type="file" id="imageInput1" name="image1" accept="image/*" class="hidden-input">
                             <button type="button" class="uploadButton" data-target="imageInput1">Subir Imagen</button>
                         </div>
                         <div class="image-box">
                             <div class="image-preview" id="imagePreview2">Agregar +</div>
-                            <input type="file" id="imageInput2" name="images" accept="image/*" class="hidden-input">
+                            <input type="file" id="imageInput2" name="image2" accept="image/*" class="hidden-input">
                             <button type="button" class="uploadButton" data-target="imageInput2">Subir Imagen</button>
                         </div>
                         <div class="image-box">
                             <div class="image-preview" id="imagePreview3">Agregar +</div>
-                            <input type="file" id="imageInput3" name="images" accept="image/*" class="hidden-input">
+                            <input type="file" id="imageInput3" name="image3" accept="image/*" class="hidden-input">
                             <button type="button" class="uploadButton" data-target="imageInput3">Subir Imagen</button>
                         </div>
                     </div>    
@@ -146,7 +144,6 @@
         document.querySelectorAll('input[type="file"]').forEach(input => {
             input.addEventListener('change', function(event) {
                 const files = event.target.files;
-                const previewId = event.target.nextElementSibling.getAttribute('data-target');
                 const previewElement = event.target.previousElementSibling;
                 if (files.length > 0) {
                     const file = files[0];
@@ -154,64 +151,40 @@
                     reader.onload = function(e) {
                         const img = document.createElement('img');
                         img.src = e.target.result;
-                        previewElement.innerHTML = '';
-                        previewElement.appendChild(img);
+                        previewElement.innerHTML = ''; // Limpia cualquier contenido anterior
+                        previewElement.appendChild(img); // Agrega la nueva imagen
                     }
                     reader.readAsDataURL(file);
                 }
             });
         });
+
     </script>
     <script>
-       document.getElementById('addProductForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Prevenir el envío predeterminado del formulario
+        document.getElementById('addProductForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevenir el envío predeterminado del formulario
 
-    const formData = new FormData(this); // Crear un objeto FormData para manejar los datos del formulario
+        const formData = new FormData(this); // Crear un objeto FormData para manejar los datos del formulario
 
-    // Agregar imágenes si hay archivos seleccionados
-    const imageInputs = document.querySelectorAll('input[type="file"]');
-    imageInputs.forEach(input => {
-        const files = input.files;
-        if (files.length > 0) {
-            for (let file of files) {
-                formData.append('images', file);
+        try {
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json(); // Lee la respuesta como JSON
+            if (response.ok && result.success) {
+                alert('Producto guardado exitosamente');
+                this.reset();
+            } else {
+                throw new Error(result.message || 'Error en la carga del producto');
             }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Hubo un problema con la carga del producto: ' + error.message);
         }
     });
 
-    // Enviar los datos a la API
-    try {
-    const response = await fetch(this.action, {
-        method: 'POST',
-        body: formData,
-    });
-
-    const responseText = await response.text(); // Lee la respuesta como texto
-    console.log(responseText); // Para depurar, imprime el texto de la respuesta
-
-    let result;
-    try {
-        result = JSON.parse(responseText); // Intenta parsear el texto como JSON
-    } catch (error) {
-        throw new Error('La respuesta no es un JSON válido: ' + responseText);
-    }
-
-    if (!response.ok) {
-        throw new Error(result.message || 'Error en la carga del producto');
-    }
-
-    if (result.success) {
-        alert('Producto guardado exitosamente');
-        this.reset();
-    } else {
-        alert('Error: ' + result.message);
-    }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Hubo un problema con la carga del producto: ' + error.message);
-    }
-
-});
 
 </script>
 </body>

@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
 const path = require('path'); 
-const multer = require('multer'); // Importar multer
+const upload = require('../config/multerConfig');
 
-const storage = multer.diskStorage({
+//const multer = require('multer'); // Importar multer
+
+/*const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/'); // Carpeta donde se guardarán las imágenes
     },
@@ -12,9 +14,16 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + '-' + file.originalname); // Nombra el archivo con un timestamp
     }
 });
-const upload = multer({ storage: storage });
-//router.post('/products', upload.array('images', 3), productController.createProduct); // Solo una declaración de la ruta
-router.post('/products', upload.array('images', 3), productController.createProduct);
+
+// Configurar `multer` para recibir hasta 3 imágenes con nombres específicos (image1, image2, image3)
+const upload = multer({ storage: storage }).fields([
+    { name: 'image1', maxCount: 1 },
+    { name: 'image2', maxCount: 1 },
+    { name: 'image3', maxCount: 1 }
+]);*/
+
+// Ruta para crear productos
+router.post('/products', upload, productController.createProduct);
  
 
 // Rutas para obtener todos los productos y operaciones CRUD
