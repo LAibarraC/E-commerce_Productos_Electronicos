@@ -3,6 +3,7 @@ const router = express.Router();
 const productController = require('../controllers/productController');
 const path = require('path'); 
 const upload = require('../config/multerConfig');
+const Product = require('../models/product'); 
 
 //const multer = require('multer'); // Importar multer
 
@@ -25,6 +26,26 @@ const upload = multer({ storage: storage }).fields([
 // Ruta para crear productos
 router.post('/products', upload, productController.createProduct);
  
+const Category = require('../models/category');
+
+router.get('/products/:id', async (req, res) => {
+    try {
+        const product = await Product.findByPk(req.params.id, {
+            include: [{
+                model: Category,
+                attributes: ['id', 'name'] // Obtén el ID y el nombre de la categoría
+            }]
+        });
+        if (product) {
+            res.json({ success: true, product });
+        } else {
+            res.json({ success: false, message: 'Producto no encontrado' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Error en la base de datos' });
+    }
+});
+
 
 // Rutas para obtener todos los productos y operaciones CRUD
 router.get('/products', productController.getAllProducts);

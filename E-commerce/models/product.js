@@ -87,6 +87,10 @@ Product.init({
         allowNull: true,
         defaultValue: true
     },
+    color: { // Agrega este campo para el color
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     categoryId: { // Campo para la relación con categoría
         type: DataTypes.INTEGER,
         allowNull: false,

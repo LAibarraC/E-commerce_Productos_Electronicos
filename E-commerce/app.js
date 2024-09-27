@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.use(express.static(path.join(__dirname, 'views/Product')));
 
 
@@ -31,6 +32,11 @@ app.get('/addproduct', (req, res) => {
 app.get('/listproduct', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/Product/HTML/Listproduct.html')); 
 });
+
+app.get('/viewproduct/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/Product/HTML/Viewproduct.html'));
+});
+
 
 // Rutas de la API
 app.use('/api', userRoutes); 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listproduct</title>
-    <link rel="stylesheet" href="CSS/Listproduct.css">
+    <link rel="stylesheet" href="/CSS/Listproduct.css">
     <style>
         /* Estilo del modal */
         .modal {
@@ -30,29 +30,16 @@
             border-radius: 10px;
         }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        #ok-button{
+        #ok-button {
             padding: 5px;
             border-radius: 5px;
             background-color: rgba(253, 56, 79, 1);
             border: solid rgba(253, 56, 79, 1);
             width: 100px;
             height: 30px;
-            text-align: 10px;
         }
-        #ok-button:hover{
+        
+        #ok-button:hover {
             background-color: #d70101;
         }
     </style>
@@ -62,23 +49,15 @@
     
     <script>
         // Cargar la barra de navegación
-        fetch('/navbar/navbar.html')
+        fetch('navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-container').innerHTML = data;
             });
 
-        // Mostrar el submenú
-        document.addEventListener('click', function(e) {
-            if (e.target && e.target.id === 'menu-button') {
-                const submenu = document.getElementById('submenu');
-                submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-            }
-        });
-
         // Función para cargar productos
         function loadProducts() {
-            fetch('http://localhost:3000/api/products') // Cambia esta URL por la de tu API
+            fetch('http://localhost:3000/api/products') 
                 .then(response => response.json())
                 .then(data => {
                     console.log(data); // Imprimir la respuesta en la consola para verificar
@@ -102,7 +81,9 @@
                                     <button class="action-button delete" data-id="${product.id}">
                                         <img class="icono" src="eliminar.png" alt="Icono">
                                     </button>
-                                    <button class="action-button details"><img class="icono" src="vista.png" alt="Icono"></button>
+                                    <button class="action-button details" data-id="${product.id}">
+                                        <img class="icono" src="vista.png" alt="Icono">
+                                    </button>
                                     <button class="action-button edit"><img class="icono" src="editar.png" alt="Icono"></button>
                                 </div>
                             `;
@@ -114,6 +95,14 @@
                             button.addEventListener('click', function() {
                                 const productId = this.getAttribute('data-id');
                                 deleteProduct(productId);
+                            });
+                        });
+
+                        // Agregar evento de clic a los botones de detalles
+                        document.querySelectorAll('.details').forEach(button => {
+                            button.addEventListener('click', function() {
+                                const productId = this.getAttribute('data-id');
+                                window.location.href = `http://localhost:3000/viewproduct/${productId}`; // Cambia esta URL por la de tu página de detalles
                             });
                         });
                     } else {
@@ -148,7 +137,7 @@
 
         // Cerrar el modal cuando se hace clic en el botón OK
         document.addEventListener("click", function(event) {
-            if (event.target.id === "ok-button" || event.target.className === "close") {
+            if (event.target.id === "ok-button") {
                 document.getElementById("confirmation-modal").style.display = "none";
             }
         });
@@ -167,20 +156,19 @@
                 <button class="add_product_button" id="add-product-btn">Nuevo Producto</button>
             </div>
         </div>
-        <!-- Aquí se cargan los productos -->
         <div id="product-list"></div>
     </div>
 
     <!-- Modal de Confirmación -->
     <div id="confirmation-modal" class="modal">
         <div class="modal-content">
-            <p id="confirmation-message"><h4>Producto eliminado</h4></p><br>
-            <button id="ok-button"><h4>OK</h4></button>
+            <p id="confirmation-message"><h4>Producto eliminado</h4></p>
+            <button id="ok-button">OK</button>
         </div>
     </div>
 
     <script>
-        // Agregar evento para redirigir al hacer clic en "Nuevo Producto"
+        // Redirigir al hacer clic en "Nuevo Producto"
         document.getElementById('add-product-btn').addEventListener('click', function() {
             window.location.href = 'http://localhost:3000/addproduct'; // Cambia esta URL por la de tu página
         });
