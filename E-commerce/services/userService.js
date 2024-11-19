@@ -11,18 +11,24 @@ class UserService {
     }
 
     async register(userData) {
+        // Verifica si el nombre de usuario o correo ya existen
+        const existingUser = await UserRepository.findByUsername(userData.username);
+        if (existingUser) {
+            throw new Error('El nombre de usuario ya está en uso');
+        }
+
         const user = {
             name: userData.name,
             username: userData.username,
             email: userData.email,
-            password: userData.password,
+            password: userData.password, // Usamos la contraseña tal como está
             updateAt: new Date(),
             image: userData.image,
-            role: userData.role
+            role: userData.role || 'user' // Por defecto, asignar rol 'user'
         };
-        return await UserRepository.createUser(user);
-    }
 
+        return await UserRepository.createUser(user); // Llama al repositorio para crear el usuario
+    }
     async getAllUsers() {
         return await UserRepository.findAllUsers();
     }

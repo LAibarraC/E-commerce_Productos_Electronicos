@@ -14,7 +14,7 @@ class UserController {
         try {
             const userData = req.body;
             const userId = await userService.register(userData);
-            res.json({ message: 'Usuario registrado exitosamente', userId });
+            res.status(201).json({ message: 'Usuario registrado exitosamente', userId });
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
