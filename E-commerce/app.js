@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const userRoutes = require('./E-commerce/routes/userRoutes');
-const categoryRoutes = require('./E-commerce/routes/categoryRoutes');
-const productRoutes = require('./E-commerce/routes/productRoutes');
-const sequelize = require('./E-commerce/database/db');
+const userRoutes = require('./routes/userRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const productRoutes = require('./routes/productRoutes');
+const sequelize = require('./database/db');
 const path = require('path');
 
 const app = express();
