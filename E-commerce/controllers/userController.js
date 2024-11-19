@@ -5,12 +5,11 @@ class UserController {
         try {
             const { username, password } = req.body;
             const user = await userService.login(username, password);
-            res.json({ message: 'Login exitoso', user });
+            res.json({ message: 'Login exitoso', user }); // Asegúrate de que esta respuesta esté llegando correctamente al frontend
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
-    }  
-
+    }
     async register(req, res) { 
         try {
             const userData = req.body;

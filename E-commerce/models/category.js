@@ -11,7 +11,7 @@ class Category extends Model {
         this.updateAt = new Date();
     } 
 }
-
+ 
 Category.init({
     id: {
         type: DataTypes.INTEGER,

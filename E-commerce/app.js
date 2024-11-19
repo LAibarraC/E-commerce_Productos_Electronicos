@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'views/Product')));
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'views/navbar')));
 app.use(express.static(path.join(__dirname, 'views/icon')));
+app.use(express.static(path.join(__dirname, 'views/images')));
 app.use('/uploads', express.static('uploads'));
 
 
@@ -35,6 +36,14 @@ app.get('/listproduct', (req, res) => {
 
 app.get('/viewproduct/:id', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/Product/HTML/Viewproduct.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/login/HTML/login.html'));
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/login/HTML/register.html'));
 });
 
 
